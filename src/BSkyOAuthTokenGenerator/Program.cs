@@ -31,11 +31,12 @@ public class OAuthCommands
     public async Task RefreshSessionAsync(string outputName = "session.json", string instanceUrl = "https://bsky.social", bool verbose = false, CancellationToken cancellationToken = default)
     {
         var consoleLog = new ConsoleLog(verbose);
-        if (File.Exists(outputName))
+        if (!File.Exists(outputName))
         {
             consoleLog.LogError("Session file does not exist");
             return;
         }
+
         var protocol = this.GenerateProtocol(new Uri(instanceUrl));
         var sessionJson = File.ReadAllText(outputName);
         var oauthSession = OAuthSession.FromString(sessionJson);
@@ -54,14 +55,14 @@ public class OAuthCommands
         }
 
         consoleLog.Log($"Refreshed session");
-        consoleLog.Log($"Did: {session.Did}");
-        consoleLog.Log($"Access Token: {session.AccessJwt}");
-        consoleLog.Log($"Refresh Token: {session.RefreshJwt}");
+        consoleLog.LogDebug($"Did: {session.Did}");
+        consoleLog.LogDebug($"Access Token: {session.AccessJwt}");
+        consoleLog.LogDebug($"Refresh Token: {session.RefreshJwt}");
 
         var savedSession = await protocol.SaveOAuthSessionAsync();
         if (savedSession is null)
         {
-            consoleLog.LogError("OAuth Session is null");
+            consoleLog.LogError("OAuth Session is null, failed to save session");
             return;
         }
 
@@ -87,6 +88,7 @@ public class OAuthCommands
     {
         var consoleLog = new ConsoleLog(verbose);
         Uri.TryCreate(instanceUrl, UriKind.Absolute, out var iUrl);
+
         // If outputName does not end in ".json", add it.
         if (!outputName.EndsWith(".json"))
         {
@@ -110,6 +112,7 @@ public class OAuthCommands
         {
             redirectUrl = $"http://127.0.0.1:{browser.Port}";
         }
+
         var scopeList = scopes.Split(',');
         var protocol = this.GenerateProtocol(iUrl);
         consoleLog.Log($"Starting OAuth2 Authentication for {instanceUrl}");
@@ -121,7 +124,7 @@ public class OAuthCommands
             return;
         }
 
-        consoleLog.Log($"Got session, finishing OAuth2 Authentication for {instanceUrl}");
+        consoleLog.Log($"Got session, finishing OAuth2 Authentication on {instanceUrl}");
 
         var session = await protocol.AuthenticateWithOAuth2CallbackAsync(result.Response, cancellationToken);
         if (session is null)
@@ -130,10 +133,10 @@ public class OAuthCommands
             return;
         }
 
-        consoleLog.Log($"Authenticated with {instanceUrl}");
-        consoleLog.Log($"Did: {session.Did}");
-        consoleLog.Log($"Access Token: {session.AccessJwt}");
-        consoleLog.Log($"Refresh Token: {session.RefreshJwt}");
+        consoleLog.Log($"Authenticated as {session.Did}");
+        consoleLog.LogDebug($"Did: {session.Did}");
+        consoleLog.LogDebug($"Access Token: {session.AccessJwt}");
+        consoleLog.LogDebug($"Refresh Token: {session.RefreshJwt}");
 
         var savedSession = await protocol.SaveOAuthSessionAsync();
         if (savedSession is null)

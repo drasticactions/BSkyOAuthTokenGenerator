@@ -22,17 +22,17 @@ public class SystemBrowser : IBrowser
     /// </summary>
     /// <param name="port">Default port.</param>
     /// <param name="path">Default path.</param>
-    public SystemBrowser(int? port = null, string? path = null)
+    public SystemBrowser(int port = 0, string? path = null)
     {
         this.path = path;
 
-        if (!port.HasValue)
+        if (port == 0)
         {
             this.Port = this.GetRandomUnusedPort();
         }
         else
         {
-            this.Port = port.Value;
+            this.Port = port;
         }
     }
 
