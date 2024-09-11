@@ -1,0 +1,41 @@
+name: Linux
+on:
+  push:
+    branches: [ "main", v* ]
+  pull_request:
+    branches: [ "main", v* ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: 'recursive'
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Build osx-x64
+        run: |
+          make osx-x64
+        
+      - name: Upload OSX x64
+        uses: actions/upload-artifact@v4
+        with:
+          name: osx-x64
+          path: artifacts/*.tar.gz
+          
+      - name: Build osx-arm64
+        run: |
+          make osx-arm64
+        
+      - name: Upload OSX arm64
+        uses: actions/upload-artifact@v4
+        with:
+          name: osx-arm64
+          path: artifacts/*.tar.gz
