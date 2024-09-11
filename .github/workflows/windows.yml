@@ -20,9 +20,7 @@ jobs:
         with:
           dotnet-version: 8.x
 
-      - uses: dotnet/nbgv@master
-
-      - name: Perform a Pester test from the Tests.ps1 file
+      - name: Build Windows
         shell: pwsh
         run: |
           .\buildWindows.ps1
