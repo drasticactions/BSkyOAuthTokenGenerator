@@ -7,7 +7,7 @@ nuget/
 .meteor/
 .DS_Store
 .vscode/
-
+session.json
 xcuserdata/
 
 *.xcscmblueprint
