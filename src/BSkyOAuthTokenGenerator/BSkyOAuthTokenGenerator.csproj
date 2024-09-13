@@ -14,11 +14,8 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="FishyFlip" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <ProjectReference Include="..\..\external\FishyFlip\src\FishyFlip\FishyFlip.csproj" />
     </ItemGroup>
 </Project>

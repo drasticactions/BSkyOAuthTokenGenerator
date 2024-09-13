@@ -39,7 +39,7 @@ public class OAuthCommands
 
         var protocol = this.GenerateProtocol(new Uri(instanceUrl));
         var sessionJson = File.ReadAllText(outputName);
-        var oauthSession = OAuthSession.FromString(sessionJson);
+        var oauthSession = AuthSession.FromString(sessionJson);
         if (oauthSession is null)
         {
             consoleLog.LogError("Failed to read session");
@@ -59,7 +59,7 @@ public class OAuthCommands
         consoleLog.LogDebug($"Access Token: {session.AccessJwt}");
         consoleLog.LogDebug($"Refresh Token: {session.RefreshJwt}");
 
-        var savedSession = await protocol.SaveOAuthSessionAsync();
+        var savedSession = await protocol.RefreshAuthSessionAsync();
         if (savedSession is null)
         {
             consoleLog.LogError("OAuth Session is null, failed to save session");
@@ -108,7 +108,7 @@ public class OAuthCommands
             return;
         }
 
-        var scopeList = scopes.Split(',');
+        var scopeList = scopes.Split(',').Select(n => n.Trim()).ToArray();
         if (scopeList.Length == 0)
         {
             consoleLog.LogError("Invalid Scopes");
@@ -142,7 +142,7 @@ public class OAuthCommands
         consoleLog.LogDebug($"Access Token: {session.AccessJwt}");
         consoleLog.LogDebug($"Refresh Token: {session.RefreshJwt}");
 
-        var savedSession = await protocol.SaveOAuthSessionAsync();
+        var savedSession = await protocol.RefreshAuthSessionAsync();
 
         if (savedSession is null)
         {
@@ -228,7 +228,7 @@ public class OAuthCommands
         consoleLog.LogDebug($"Access Token: {session.AccessJwt}");
         consoleLog.LogDebug($"Refresh Token: {session.RefreshJwt}");
 
-        var savedSession = await protocol.SaveOAuthSessionAsync();
+        var savedSession = await protocol.RefreshAuthSessionAsync();
         if (savedSession is null)
         {
             consoleLog.LogError("OAuth Session is null");
