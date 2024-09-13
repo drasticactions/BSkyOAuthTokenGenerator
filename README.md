@@ -49,6 +49,22 @@ Options:
   -v|--verbose                  Verbose logging. (Optional)
 ```
 
+```
+Usage: start headless [options...] [-h|--help] [--version]
+
+Start new headless session.
+     This is done by generating a OAuth URL that you can copy and paste into a browser.
+     Then, once you complete the login, you copy the URL you are redirected to and paste it back.
+     This will generate a session.json file that you can use to authenticate with.
+
+Options:
+  -c|--client-id <string>       Client ID. (Default: "http://localhost")
+  -i|--instance-url <string>    Instance URL. (Default: "https://bsky.social")
+  -s|--scopes <string>          Scopes. (Default: "atproto")
+  -o|--output-name <string>     Output Name. (Default: "session.json")
+  -v|--verbose                  Verbose logging. (Optional)
+```
+
 ## Build
 
 - Be sure to check out the submodules!
