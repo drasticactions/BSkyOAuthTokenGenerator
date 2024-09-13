@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using IdentityModel.OidcClient.Browser;
 
-namespace BSkyOauthTokenGenerator;
+namespace BSkyOAuthTokenGenerator;
 
 /// <summary>
 /// System Browser.

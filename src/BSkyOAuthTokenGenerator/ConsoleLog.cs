@@ -4,7 +4,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace BSkyOauthTokenGenerator;
+namespace BSkyOAuthTokenGenerator;
 
 /// <summary>
 /// Console Log.

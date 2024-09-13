@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using BSkyOauthTokenGenerator;
+using BSkyOAuthTokenGenerator;
 using ConsoleAppFramework;
 using FishyFlip;
 using FishyFlip.Models;
