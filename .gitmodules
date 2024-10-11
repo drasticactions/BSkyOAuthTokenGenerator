@@ -1,6 +1,3 @@
 [submodule "external/FishyFlip"]
 	path = external/FishyFlip
 	url = git@github.com:drasticactions/FishyFlip.git
-[submodule "external/DA.UI"]
-	path = external/DA.UI
-	url = git@github.com:drasticactions/DA.UI.git
