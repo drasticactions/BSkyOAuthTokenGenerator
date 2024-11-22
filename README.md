@@ -1,3 +1,5 @@
+## This codebase is being updated in the [FishyFlip](https://github.com/drasticactions/FishyFlip/tree/develop/samples/OAuth) repo
+
 # BSkyOAuthTokenGenerator
 
 BSkyOAuthTokenGenerator is a simple .NET application for creating an OAuth token with [Bluesky](https://bsky.app) and the [ATProtocol](https://atproto.com/guides/overview). It can be useful for:
